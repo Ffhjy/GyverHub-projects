@@ -1,4 +1,19 @@
-https://github.com/AlexGyver/TachoLED
-https://github.com/AlexGyver/GyverLamp
-https://github.com/Serega88kos/BigClock
-https://github.com/Serega88kos/MatrixClock
+GHbutton b1, b2;
+
+void build() {
+  GHbutton b0;
+  if (hub.Button(&b0)) {
+    Serial.println(b0 ? "b0 press" : "b0 release");
+  }
+  hub.Button(&b1);
+  hub.Button(&b2);
+}
+
+void loop() {
+  if (b1) {
+    static GHtimer tmr(500);
+    if (tmr.ready()) Serial.println("hold b1");
+  }
+
+  if (b2.changed()) Serial.println(b2 ? "b2 press" : "b2 release");
+}
